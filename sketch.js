@@ -40,6 +40,7 @@ var backgroundImg;
 var end;
 var endImg;
 var gameState="serve";
+var timer = 100;
 
 
 function setup() {
@@ -92,6 +93,7 @@ text("Press Space to Serve",450,300);
 }
 if(keyDown("space")){
   gameState ="play";
+ 
 }
 if (mousePressedOver(end) ) {
  gameState ="end";
@@ -104,6 +106,10 @@ if(gameState ==="end"){
 console.log(frameCount)
 drawSprites();
 if(gameState ==="play"){
+   timer = timer - 0.1;
+   textSize(50);
+   fill("red");
+text("Timer:"+Math.round(timer),1000,100);
 spawnBed();
 spawnchair();
 spawncentretable();
@@ -123,7 +129,9 @@ spawnsofa();
 spawntable();
 spawntv();
 }
-
+if(timer <=0){
+  endGame();
+}
 }
 function endGame(){
 background(backgroundImg);
